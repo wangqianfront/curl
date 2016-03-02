@@ -1,17 +1,13 @@
 # curl
 
 
-我一向以为，curl只是一个编程用的函数库。
+我一向以为，[curl](https://curl.haxx.se/)只是一个编程用的函数库。
   
 最近才发现，这个命令本身，就是一个无比有用的网站开发工具，请看我整理的它的用法。
 
 ===================================
 
 curl网站开发指南
-
-阮一峰 整理
-
-
 
 curl是一种命令行工具，作用是发出网络请求，然后得到和提取数据，显示在"标准输出"（stdout）上面。
 
@@ -24,7 +20,6 @@ curl是一种命令行工具，作用是发出网络请求，然后得到和提�
 
 　　$ curl www.sina.com
 
-
 　　<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 　　<html><head>
 　　<title>301 Moved Permanently</title>
@@ -34,7 +29,6 @@ curl是一种命令行工具，作用是发出网络请求，然后得到和提�
 　　</body></html>
 
 如果要把这个网页保存下来，可以使用`-o`参数，这就相当于使用wget命令了。
-
 
 　　$ curl -o [文件名] www.sina.com
 
@@ -149,34 +143,34 @@ POST方法必须把数据和网址分开，curl就要用到--data参数。
 
 curl默认的HTTP动词是GET，使用`-X`参数可以支持其他动词。
 
-
+`
 　　$ curl -X POST www.example.com
-
-
+`
+`
 　　$ curl -X DELETE www.example.com
-
+`
 七、文件上传
 
 假定文件上传的表单是下面这样：
 
-
+`
 　　<form method="POST" enctype='multipart/form-data' action="upload.cgi">
 　　　　<input type=file name=upload>
 　　　　<input type=submit name=press value="OK">
 　　</form>
-
+`
 你可以用curl这样上传文件：
 
-
+`
 　　$ curl --form upload=@localfilename --form press=OK [URL]
-
+`
 八、Referer字段
 
 有时你需要在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的。
 
-
+`
 　　$ curl --referer http://www.example.com http://www.example.com
-
+`
 九、User Agent字段
 
 这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页，比如手机版和桌面版。
@@ -188,38 +182,38 @@ iPhone4的User Agent是
 
 curl可以这样模拟：
 
-
+`
 　　$ curl --user-agent "[User Agent]" [URL]
-
+`
 十、cookie
 
 使用`--cookie`参数，可以让curl发送cookie。
 
-
+`
 　　$ curl --cookie "name=xxx" www.example.com
-
+`
 至于具体的cookie的值，可以从http response头信息的`Set-Cookie`字段中得到。
 
 `-c cookie-file`可以保存服务器返回的cookie到文件，`-b cookie-file`可以使用这个文件作为cookie信息，进行后续的请求。
 
-
+`
 　　$ curl -c cookies http://example.com
 　　$ curl -b cookies http://example.com
-
+`
 十一、增加头信息
 
 有时需要在http request之中，自行增加一个头信息。`--header`参数就可以起到这个作用。
 
-
+`
 　　$ curl --header "Content-Type:application/json" http://example.com
-
+`
 十二、HTTP认证
 
 有些网域需要HTTP认证，这时curl需要用到`--user`参数。
 
-
+`
 　　$ curl --user name:password example.com
-
+`
 【参考资料】
 
 　　* [Using cURL to automate HTTP jobs](http://curl.haxx.se/docs/httpscripting.html)
